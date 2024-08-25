@@ -1,7 +1,8 @@
 name: dio_curl_logger_interceptor
-description: "A new Flutter project."
-version: 0.0.1
-homepage:
+description: "A simple dart package to help in logging HTTP requests using dio HTTP networking package"
+version: 1.0.0
+issue_tracker: https://github.com/abdallah-odeh/dio_curl_logger_interceptor/issues
+homepage: https://github.com/abdallah-odeh/dio_curl_logger_interceptor
 
 environment:
   sdk: '>=3.4.3 <4.0.0'

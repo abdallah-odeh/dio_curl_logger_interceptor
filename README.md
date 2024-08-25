@@ -1,10 +1,21 @@
 This package helps in debugging API requests using dio HTTP networking package
 
+[![pub version](https://img.shields.io/pub/v/dio_curl_logger_interceptor?logo=dart&labelColor=1B2C7A&color=BABAB2)](https://pub.dev/packages/dio_curl_logger_interceptor)
+[![pub likes](https://img.shields.io/pub/likes/dio_curl_logger_interceptor?logo=dart&labelColor=1B2C7A&color=BABAB2)](https://pub.dev/packages/dio_curl_logger_interceptor)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/abdallah-odeh/dio_curl_logger_interceptor?logo=github&labelColor=1B2C7A&color=BABAB2)](https://github.com/abdallah-odeh/dio_curl_logger_interceptor/issues?q=is%3Aissue+is%3Aopen+)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-closed/abdallah-odeh/dio_curl_logger_interceptor?logo=github&labelColor=1B2C7A&color=BABAB2)](https://github.com/abdallah-odeh/dio_curl_logger_interceptor/issues?q=is%3Aissue+is%3Aclosed+)
+
 ## Features
 
 - Works with app requests types (GET, POST, DELETE, PUT, OPTIONS, ...)
 - Works with app body types (Form data, Form URL encoded, Raw JSON, Raw text, ...)
 - Compatibility with Postman
+
+<br>
+
+If you would like to support me, buy me a coffee 🙃<br>
+<b>HALF OF THE DONATIONS WILL GO TO GAZA, Free Palestine 🇵🇸</b><br>
+<a href="https://www.buymeacoffee.com/abdallahodeh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" width="217"></a>
 
 ## Getting started
 
