@@ -1,25 +1,54 @@
 library dio_curl_logger_interceptor;
 
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+typedef LoggerFunction = void Function(String text);
+
 class DioCurlLoggerInterceptor extends Interceptor {
-  const DioCurlLoggerInterceptor();
+  final LoggerFunction? onPrint;
+  final bool sendOnRequest;
+
+  const DioCurlLoggerInterceptor({this.onPrint, this.sendOnRequest = true});
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    _renderCurlRepresentation(options);
+    if (sendOnRequest) {
+      _renderCurlRepresentation(options);
+    }
 
     super.onRequest(options, handler);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    if (!sendOnRequest) {
+      _renderCurlRepresentation(response.requestOptions);
+    }
+
+    super.onResponse(response, handler);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (!sendOnRequest) {
+      _renderCurlRepresentation(err.requestOptions);
+    }
+
+    super.onError(err, handler);
   }
 
   void _renderCurlRepresentation(RequestOptions requestOptions) {
     // add a breakpoint here so all errors can break
     try {
-      log(_cURLRepresentation(requestOptions));
+      final representation = _cURLRepresentation(requestOptions);
+      if (onPrint != null) {
+        onPrint!(representation);
+      } else {
+        log(representation, name: 'cURL', time: DateTime.now());
+      }
     } catch (err) {
       log('unable to create a CURL representation of the requestOptions');
     }
@@ -46,8 +75,12 @@ class DioCurlLoggerInterceptor extends Interceptor {
 
     final contentType = _getContentType(options);
 
-    switch(contentType.toLowerCase()) {
+    switch (contentType.toLowerCase()) {
       case 'application/json': //raw json
+      case 'application/javascript': //java script
+      case 'application/xml': //xml
+      case 'text/plain': //plain text
+      case 'text/html': //html
         return ['--data \'${options.data}\''];
       case 'application/x-www-form-urlencoded': // x-www-form-urlencoded
         return _getBody('data-urlencode', options.data);
