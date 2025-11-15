@@ -1,5 +1,6 @@
 library dio_curl_logger_interceptor;
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -77,6 +78,7 @@ class DioCurlLoggerInterceptor extends Interceptor {
 
     switch (contentType.toLowerCase()) {
       case 'application/json': //raw json
+        return ['--data \'${jsonEncode(options.data)}\''];
       case 'application/javascript': //java script
       case 'application/xml': //xml
       case 'text/plain': //plain text
